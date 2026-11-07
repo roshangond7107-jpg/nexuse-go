@@ -86,5 +86,5 @@ export function sniffImageType(b: Uint8Array): 'image/jpeg' | 'image/png' | 'ima
 
 /** Strips control chars and angle brackets from plain-text user content before storage. React/Next escape on render; this is defence in depth. */
 export function sanitizePlainText(s: string): string {
-  return s.replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g, '').replace(/[<>]/g, '');
+  return s.replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g, '').replace(/[<>]/g, ''); // eslint-disable-line no-control-regex -- intentionally strips control characters
 }

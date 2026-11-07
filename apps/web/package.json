@@ -2,7 +2,7 @@
   "name": "@nexuse/web", "version": "0.1.0", "private": true,
   "scripts": {
     "dev": "next dev", "build": "next build", "start": "next start",
-    "typecheck": "tsc -p tsconfig.json", "lint": "echo 'lint: configure in Batch 5'",
+    "typecheck": "tsc -p tsconfig.json", "lint": "eslint .",
     "test": "echo 'no web-only tests yet; shared logic is tested in @nexuse/catalog'"
   },
   "dependencies": {

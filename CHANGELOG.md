@@ -1,4 +1,17 @@
 # CHANGELOG
+
+## Stabilization pass (2026-11-07) — unreleased, changes unverified except where noted
+Added
+- `WINDOWS_ANDROID_BUILD.md`; `scripts/android-preflight.mjs` (read-only env check; ran in sandbox); `scripts/build-android-apk.mjs` (wraps Gradle, only reports an APK if the file exists; NOT run end-to-end); `.gitattributes` (LF for `gradlew`/`*.sh`, CRLF for `*.bat`); `eslint.config.mjs` (flat config, NOT run).
+- Dependencies (declared, NOT installed, lockfile NOT regenerated): root devDependencies `eslint 9.17.0`, `@eslint/js 9.17.0`, `typescript-eslint 8.18.2`, `eslint-plugin-react-hooks 5.1.0`, `@next/eslint-plugin-next 15.1.3`; mobile `expo-system-ui ~4.0.6`.
+Changed
+- `apps/mobile/app.json`: `android.allowBackup=false`; blocked `WRITE_EXTERNAL_STORAGE`.
+- `apps/mobile/android/app/src/main/AndroidManifest.xml`: `allowBackup="false"`; `WRITE_EXTERNAL_STORAGE` removed via `tools:node="remove"` (mirrors app.json; hand-edited, not regenerated with prebuild).
+- `apps/mobile/android/app/src/main/res/values/colors.xml`: `colorPrimary` #023c69 -> #164B31.
+- All `lint` scripts (web, mobile, 4 packages) changed from `echo` placeholders to `eslint .`; mobile gained `android:doctor`, `android:apk:debug`, `android:apk:release-local`; root gained `android:doctor`.
+Removed: nothing. Not touched: web app, shared packages, migrations, seed, tests, pnpm version.
+Required follow-up: run `pnpm install` (not frozen) and commit the updated `pnpm-lock.yaml`; until then `pnpm install --frozen-lockfile` (CI) will fail.
+
 Only what actually happened. No invented history.
 
 ## Batch 3.6 — verification workflow hardening & decision records (docs/scripts only; no source, migration or test changed)

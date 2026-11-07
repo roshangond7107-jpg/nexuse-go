@@ -1,4 +1,26 @@
 # PROJECT STATUS — NEXUSE GO
+
+## 2026-11-07 (stabilization pass) — READ FIRST
+This pass inspected the ZIP (commit 8908e95) and made Android/lint **configuration** changes **without network access**. Therefore:
+
+| Check | Result in this pass |
+|---|---|
+| `pnpm install`, real Vitest 67/67, `pnpm typecheck` 6/6, Next.js build (12 routes), Expo Doctor 18/18 | **Not re-run here.** Taken from the developer's own Windows report; not independently verified by me. |
+| `scripts/check-secrets.sh` | **Run, passed** (exit 0). |
+| `scripts/android-preflight.mjs` | **Run in sandbox**: correctly reports missing ANDROID_HOME / node_modules (expected here). Node + JDK 21 detected. |
+| JSON validity of edited `app.json` / `package.json` files | **Checked**, valid. |
+| ESLint | **Config written, NOT executed.** Dependencies not installed, lockfile not updated. May need rule tuning on first run. |
+| `expo-system-ui` | **Added to `apps/mobile/package.json` (~4.0.6), NOT installed**; lockfile not updated. Confirm with `npx expo install expo-system-ui` (it will pick the exact SDK 52 version). |
+| Android Gradle build / APK | **NOT built. No APK exists.** Gradle, Android SDK and Windows were unavailable. |
+| Supabase RLS suite (116/116) | Previously reported by an earlier session on an emulated Postgres; **not re-run** (no PostgreSQL here). |
+| Web/mobile-specific tests | Still placeholders (`echo`). Only shared packages have real tests. |
+
+Android native project (inspected, preserved, not regenerated): Gradle 8.10.2, compileSdk 35, targetSdk 34, minSdk 24, NDK 26.1.10909125, `com.nexusego.app`, New Architecture + Hermes. Changes: `allowBackup` false, `WRITE_EXTERNAL_STORAGE` removed, `colorPrimary` set to brand green. Debug builds do not embed JS (need Metro). Release is signed with the public debug keystore: local testing only.
+
+Unchanged and still true: Students-only community, 2% commission logic untouched, no auth/OTP/payments/backend, bucket `listing-images` still public in migration 0003 (to become private in a later migration), DOB logic still in schema. Batch 4 not started.
+
+Build instructions: `WINDOWS_ANDROID_BUILD.md`.
+
 Updated: 2026-11-07 · Milestone: **Batch 3 complete as far as verifiable offline; build verification pending on a networked machine; Batch 4 architecture documented, not started** · Tagline: Buy. Sell. Reuse. · India · INR
 
 ## Owner decisions (provisional, 2026-11-07)

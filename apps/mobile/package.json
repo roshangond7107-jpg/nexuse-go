@@ -7,9 +7,12 @@
     "start": "expo start",
     "android": "expo run:android",
     "typecheck": "tsc -p tsconfig.json",
-    "lint": "echo 'lint: configure in Batch 5'",
+    "lint": "eslint .",
     "test": "echo 'no mobile-only tests yet; shared logic is tested in @nexuse/catalog'",
-    "build": "echo 'native builds use EAS (Batch 9)'",
+    "build": "echo 'no JS build step; Android APK: see WINDOWS_ANDROID_BUILD.md'",
+    "android:doctor": "node ../../scripts/android-preflight.mjs",
+    "android:apk:debug": "node ../../scripts/build-android-apk.mjs debug",
+    "android:apk:release-local": "node ../../scripts/build-android-apk.mjs release",
     "ios": "expo run:ios"
   },
   "dependencies": {
@@ -27,6 +30,7 @@
     "expo-router": "~4.0.14",
     "expo-splash-screen": "~0.29.18",
     "expo-status-bar": "~2.0.0",
+    "expo-system-ui": "~4.0.6",
     "react": "18.3.1",
     "react-native": "0.76.9",
     "react-native-safe-area-context": "4.12.0",

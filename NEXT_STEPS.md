@@ -1,4 +1,15 @@
 # NEXT STEPS (dependency-ordered)
+
+## Immediate (stabilization follow-up), in order
+1. `pnpm install`; commit the updated `pnpm-lock.yaml`. In `apps/mobile` run `npx expo install expo-system-ui` and `npx expo install --check`.
+2. `pnpm lint`. Expect some findings; fix real ones, tune rules only with justification. Then `pnpm typecheck`, `pnpm test`, `pnpm build` to confirm nothing regressed.
+3. `pnpm android:doctor`, then follow `WINDOWS_ANDROID_BUILD.md`. Send the full Gradle output if it fails; fix only reproducible errors. Do not call Android "verified" until an APK exists and `aapt2 dump badging` shows `com.nexusego.app`.
+4. Confirm `expo-system-ui` warning is gone with `npx expo-doctor` and by running `expo prebuild` into a scratch copy (do not overwrite `apps/mobile/android` blindly; diff first).
+5. Re-run the DB/RLS suite on a networked machine; later against real Supabase.
+Risks: lockfile out of sync until step 1; ESLint rules untested; first Gradle build may hit Windows path-length, NDK/CMake or JDK issues; release APK is debug-signed.
+Then continue with the existing list below (Batch 4 only after steps 1-4 pass).
+
+
 Each step lists what it needs. "Unblocks" = what cannot start before it.
 
 0a. **Owner/legal inputs** (none block step 0): choose SMS provider & CAPTCHA via `docs/PROVIDER-EVALUATION.md`; counsel review of `docs/AGE-VERIFICATION-REQUIREMENTS.md` and `docs/GUARDIAN-CONSENT-WORKFLOW.md`; start TRAI DLT registration; verify `com.nexusego.app` availability.

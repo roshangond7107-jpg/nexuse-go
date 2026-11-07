@@ -19,7 +19,7 @@ export const DEFAULT_SEARCH: SearchParams = { community: DEFAULT_COMMUNITY_ID, q
 
 /** Parses untrusted URL input into a safe SearchParams. Unknown/invalid values fall back to defaults. */
 export function parseSearchParams(raw: Raw): SearchParams {
-  const q = (pick(raw, 'q') ?? '').replace(/[\u0000-\u001F\u007F<>]/g, '').trim().slice(0, 100);
+  const q = (pick(raw, 'q') ?? '').replace(/[\u0000-\u001F\u007F<>]/g, '').trim().slice(0, 100); // eslint-disable-line no-control-regex -- intentionally strips control characters from search input
   const comm = pick(raw, 'community');
   const community: CommunityId = comm && isCommunityActive(comm) ? (comm as CommunityId) : DEFAULT_COMMUNITY_ID;
   const cat = pick(raw, 'category');
