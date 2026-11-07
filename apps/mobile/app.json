@@ -1,0 +1,15 @@
+{
+  "expo": {
+    "name": "NEXUSE GO", "slug": "nexuse-go", "scheme": "nexusego", "version": "0.1.0",
+    "orientation": "portrait", "userInterfaceStyle": "automatic", "newArchEnabled": true,
+    "icon": "./assets/icon.png",
+    "splash": { "image": "./assets/splash.png", "resizeMode": "contain", "backgroundColor": "#164B31" },
+    "android": {
+      "package": "com.nexusego.app",
+      "adaptiveIcon": { "foregroundImage": "./assets/adaptive-icon.png", "backgroundColor": "#164B31" },
+      "blockedPermissions": ["android.permission.RECORD_AUDIO", "android.permission.ACCESS_FINE_LOCATION", "android.permission.ACCESS_COARSE_LOCATION"]
+    },
+    "plugins": ["expo-router", ["expo-image-picker", { "photosPermission": "NEXUSE GO needs access to your photos so you can attach pictures to a listing.", "cameraPermission": false, "microphonePermission": false }]],
+    "experiments": { "typedRoutes": true }
+  }
+}
